@@ -71,6 +71,8 @@ class DomainUserMapperService {
 	 * Where to find user profiles
 	 */
 	Object findUserByUsername(String username){
+		log.debug("buscando amor en la calle "+getConf().userLookup.usernamePropertyName+" es por eso "+username)
+		log.debug("de clase "+getUserClass())
 		getUserClass().findWhere((getConf().userLookup.usernamePropertyName): username)
 	}
 }

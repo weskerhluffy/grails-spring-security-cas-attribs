@@ -13,14 +13,16 @@ import org.springframework.security.core.userdetails.UserDetails
  * @author daniel.d.bower
  */
 class CasAuthenticationUserDetailsService extends
-	AbstractCasAssertionUserDetailsService {
+AbstractCasAssertionUserDetailsService {
 
 	/**
 	 * Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least one role, so
 	 * we give a user with no granted roles this one which gets past that restriction but
 	 * doesn't grant anything.
 	 */
-	private static final List NO_ROLES = [new GrantedAuthorityImpl(SpringSecurityUtils.NO_ROLE)]
+	private static final List NO_ROLES = [
+		new GrantedAuthorityImpl(SpringSecurityUtils.NO_ROLE)
+	]
 
 	/**
 	 * Should we check for and pull apart Authorities that have been concatenated together? - seems to happen in the cas client lib
@@ -34,27 +36,42 @@ class CasAuthenticationUserDetailsService extends
 	 */
 	void setAuthorityAttribNamesFromCas(authorityAttribNamesFromCas){
 		grantedAuthoritiesService = new GrantedAuthorityFromAssertionAttributesUserDetailsService(
-			authorityAttribNamesFromCas as String[])
+				authorityAttribNamesFromCas as String[])
 	}
 
 	/** Dependency injection for creating and finding Users **/
 	DomainUserMapperService userMapper
+	DomainUserMapperService domainUserMapperService
 
 	/** Dependency injection for creating userDetails objects **/
 	UserDetailsFromDomainClassFactory userDetailsFromDomainClassFactory
 
 	@Override
 	protected UserDetails loadUserDetails(Assertion casAssert) {
+		log.debug("En caCAS attirbutos plugin de mierda")
+		log.debug("El assertcaca es "+casAssert.dump())
+		log.debug("El principal de shit es "+casAssert.getPrincipal().dump())
+		log.debug("el userwaper mierda "+userMapper)
+		log.debug("domainusermapservice es "+domainUserMapperService)
+		log.debug("la factoria, papi chundo... "+userDetailsFromDomainClassFactory)
+		if(!userMapper)
+		{
+			userMapper=domainUserMapperService
+		}
 		//look up user profile in database
 		def user = userMapper.findUserByUsername(casAssert.getPrincipal().getName())
+		log.debug("buscando al wey "+casAssert.getPrincipal().getName())
+		log.debug("esa cagada d usuario "+user?.dump())
 
 		//Create the user profile if it does not already exist
 		if(!user){
 			user = userMapper.newUser(casAssert.getPrincipal().getName(), casAssert.principal)
+			log.debug("ese puto usuario no existia usuario "+user.dump())
 		}
 
 		//authorities
 		def casUser = grantedAuthoritiesService.loadUserDetails(casAssert)
+		log.debug("las autoridades "+casUser)
 		def casAuthorities = []
 
 		casUser.authorities.each{ authBundle ->
@@ -78,6 +95,7 @@ class CasAuthenticationUserDetailsService extends
 
 		if (!casAuthorities) casAuthorities=NO_ROLES
 
+		log.debug("antes d pasar a la factoria, si alguna vez, sentist algo x mi... "+userDetailsFromDomainClassFactory)
 		return userDetailsFromDomainClassFactory.createUserDetails(user, casAuthorities)
 	}
 
