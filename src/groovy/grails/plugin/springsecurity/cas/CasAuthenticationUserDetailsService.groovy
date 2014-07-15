@@ -1,6 +1,6 @@
-package org.codehaus.groovy.grails.plugins.springsecurity.cas
+package grails.plugin.springsecurity.cas
 
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.jasig.cas.client.validation.Assertion
 import org.springframework.security.cas.userdetails.AbstractCasAssertionUserDetailsService
 import org.springframework.security.cas.userdetails.GrantedAuthorityFromAssertionAttributesUserDetailsService

@@ -1,7 +1,7 @@
-package org.codehaus.groovy.grails.plugins.springsecurity.cas
+package grails.plugin.springsecurity.cas
 
-import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.userdetails.GrailsUser
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 

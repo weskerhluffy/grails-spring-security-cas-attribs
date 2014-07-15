@@ -1,9 +1,9 @@
-package org.codehaus.groovy.grails.plugins.springsecurity.cas
+package grails.plugin.springsecurity.cas
 
 import java.lang.reflect.Constructor
 
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.jasig.cas.client.authentication.AttributePrincipal
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional

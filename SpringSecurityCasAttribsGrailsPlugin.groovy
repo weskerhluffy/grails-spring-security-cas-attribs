@@ -1,7 +1,7 @@
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-import org.codehaus.groovy.grails.plugins.springsecurity.cas.CasAuthenticationUserDetailsService
-import org.codehaus.groovy.grails.plugins.springsecurity.cas.DefaultUserDetailsFromDomainClassFactory
-import org.codehaus.groovy.grails.plugins.springsecurity.cas.DomainUserMapperService
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.cas.CasAuthenticationUserDetailsService
+import grails.plugin.springsecurity.cas.DefaultUserDetailsFromDomainClassFactory
+import grails.plugin.springsecurity.cas.DomainUserMapperService
 import org.jasig.cas.client.validation.Saml11TicketValidator
 
 class SpringSecurityCasAttribsGrailsPlugin {
